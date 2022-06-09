@@ -1,1 +1,4 @@
-export class Faculty {}
+export class Faculty {
+  id: string;
+  deleted: any;
+}

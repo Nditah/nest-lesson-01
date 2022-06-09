@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { 
+  Controller, 
+  Get, 
+  Post, 
+  Body, 
+  Patch, 
+  Param, 
+  Delete 
+} from '@nestjs/common';
 import { FacultyService } from './faculty.service';
 import { CreateFacultyDto } from './dto/create-faculty.dto';
 import { UpdateFacultyDto } from './dto/update-faculty.dto';
@@ -16,10 +24,14 @@ export class FacultyController {
   findAll() {
     return this.facultyService.findAll();
   }
+  @Get('trashed')
+  fidTrashed(@Param('id') id: string) {
+    return this.facultyService.findTrash();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.facultyService.findOne(+id);
+    return this.facultyService.findOne(id);
   }
 
   @Patch(':id')
