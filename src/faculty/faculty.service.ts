@@ -31,11 +31,24 @@ create(data: CreateFacultyDto) {
     findOne(id: string) {
       return this.records.filter((item) => item.id == id);
     }
-  update(id: number, updateFacultyDto: UpdateFacultyDto) {
-    return `This action updates a #${id} faculty`;
-  }
+    update(id: string, UpdateFacultyDto: UpdateFacultyDto) {
+      const index = this.getIndex(id);
+      const record = this.records[index];
+      const update = { ...record, ...UpdateFacultyDto };
+      this.records[index] = update;
+      return this.records[index];
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} faculty`;
-  }
+    trash(id: string) {
+      const index = this.getIndex(id);
+      const record = this.records[index];
+      const update = { ...record, deleted: true };
+      this.records[index] = update;
+      return this.records[index];
+    }
+  
+    remove(id: string) {
+      const index = this.getIndex(id);
+      this.records.splice(index, 1);
+    }
 }

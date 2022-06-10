@@ -1,4 +1,9 @@
 export class Faculty {
   id: string;
-  deleted: any;
+  name: string;
+  head: string;
+  dean: string;
+  department: string;
+  createdAt?:Date;
+  deleted?: boolean;
 }

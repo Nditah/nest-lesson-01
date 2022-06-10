@@ -36,11 +36,11 @@ export class FacultyController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateFacultyDto: UpdateFacultyDto) {
-    return this.facultyService.update(+id, updateFacultyDto);
+    return this.facultyService.update(id, updateFacultyDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.facultyService.remove(+id);
+    return this.facultyService.remove(id);
   }
 }
