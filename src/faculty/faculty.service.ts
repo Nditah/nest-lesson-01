@@ -20,11 +20,11 @@ create(data: CreateFacultyDto) {
       return this.records.findIndex((item) => item.id === id);
     }
   
-    findAll(): CreateFacultyDto[] {
+    findAll(): Faculty[] {
       return this.records.filter((item) => !item.deleted);
     }
   
-    findTrash(): CreateFacultyDto[] {
+    findTrash(): Faculty[] {
       return this.records.filter((item) => item.deleted == true);
     }
   
