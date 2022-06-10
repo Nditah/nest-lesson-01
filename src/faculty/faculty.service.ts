@@ -20,15 +20,15 @@ create(data: CreateFacultyDto) {
       return this.records.findIndex((item) => item.id === id);
     }
   
-    findAll(): Faculty[] {
+    findAll(): CreateFacultyDto[] {
       return this.records.filter((item) => !item.deleted);
     }
   
-    findTrash(): Faculty[] {
+    findTrash(): CreateFacultyDto[] {
       return this.records.filter((item) => item.deleted == true);
     }
   
-    findOne(id: string) {
+    findOne(id: string)  {
       return this.records.filter((item) => item.id == id);
     }
     update(id: string, UpdateFacultyDto: UpdateFacultyDto) {
