@@ -1,26 +1,48 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
-
+import { Department } from './entities/department.entity';
 @Injectable()
 export class DepartmentService {
+  departments: Array<Department> = [];
   create(createDepartmentDto: CreateDepartmentDto) {
-    return 'This action adds a new department';
+    const id = `${this.departments.length + 1}`;
+    const newDepartment = new Department();
+    const newRecord = { id, ...newDepartment, ...createDepartmentDto };
+    this.departments.push(newRecord);
+    return newRecord;
   }
 
   findAll() {
-    return `This action returns all department`;
+    return this.departments;
+  }
+  getIndex(id: string): number {
+    return this.departments.findIndex((item) => item.id === id);
+  }
+  findTrash(): Department[] {
+    return this.departments.filter((item) => item.deleted == true);
+  }
+  findOne(id: string) {
+    return this.departments.filter((item) => item.id == id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} department`;
+  update(id: string, updateDepartmentDto: UpdateDepartmentDto) {
+    const index = this.getIndex(id);
+    const record = this.departments[index];
+    const update = { ...record, ...updateDepartmentDto };
+    this.departments[index] = update;
+    return this.departments[index];
+  }
+  bin(id: string) {
+    const index = this.getIndex(id);
+    const record = this.departments[index];
+    const update = { ...record, deleted: true };
+    this.departments[index] = update;
+    return this.departments[index];
   }
 
-  update(id: number, updateDepartmentDto: UpdateDepartmentDto) {
-    return `This action updates a #${id} department`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} department`;
+  remove(id: string) {
+    const index = this.getIndex(id);
+    this.departments.splice(index, 1);
   }
 }
